@@ -23,7 +23,7 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 ### Build (Visual Studio)
 
 ```bash
-git clone https://github.com/your-username/Dual-Backend-MLP-From-Scratch-CUDA.git
+git clone https://github.com/muchlakshay/Dual-Backend-MLP-From-Scratch-CUDA.git
 cd Dual-Backend-MLP-From-Scratch-CUDA
 ```
 - Open .sln file in Visual Studio
