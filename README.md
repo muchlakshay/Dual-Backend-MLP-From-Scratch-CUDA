@@ -14,5 +14,5 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 - Model Saving And Loading Mechanism
 - Fully Customizable: Choose batch size, learning rate, architecture, backend, and more
 
-  
- 
+## ARCHITECTURE OVERVIEW
+
