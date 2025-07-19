@@ -137,7 +137,7 @@ __global__ void Kernels::rowBroadcast(float* vec, float* mat, float* store_in, i
 }
 
 // CUDA kernel to perform column-wise broadcasting of a vector over a matrix
-// It adds the corresponding element from the vector to each element in the matrix column-wise.
+// It adds the corresponding element from the vector to each element in the matrix column-wise
 //
 // Input:
 // - vec      : Pointer to a 1D vector of size [rows], stored in device memory
@@ -286,15 +286,15 @@ __global__ void Kernels::calculate_exps(float* activations, float* store_in, int
 	}
 }
 
-// CUDA kernel to compute the max and the sum of exponentials for each row of the input matrix.
+// CUDA kernel to compute the max and the sum of exponentials for each row of the input matrix
 // This is used in a numerically stable softmax operation
 // Each thread handles one row
 //
 // Parameters:
-// - preActivations: Input matrix [rows x cols].
-// - store_exp_sum: Output array [rows], stores the sum of exp(x - max) for each row.
-// - store_max: Output array [rows], stores the max value in each row.
-// - rows: Number of rows in the matrix.
+// - preActivations: Input matrix [rows x cols]
+// - store_exp_sum: Output array [rows], stores the sum of exp(x - max) for each row
+// - store_max: Output array [rows], stores the max value in each row
+// - rows: Number of rows in the matrix
 // - cols: Number of columns in the matrix
 __global__ void Kernels::calculate_max_and_sum_exp(float* preActivations,
 	float* store_exp_sum, float* store_max, int rows, int cols){
@@ -340,7 +340,7 @@ __global__ void Kernels::softmax(float* preActivations, float* activations, floa
 	}
 }
 
-// CUDA kernel to perform element-wise multiplication of two matrices.
+// CUDA kernel to perform element-wise multiplication of two matrices
 // Each element: store_in[i][j] = matrix_A[i][j] * matrix_B[i][j]
 //
 // Parameters:
@@ -359,8 +359,8 @@ __global__ void Kernels::elementWiseProduct(float* matrix_A, float* matrix_B, fl
 	}
 }
 
-// CUDA kernel to compute the derivative (gradient) of activation functions.
-// The result is stored in 'store_in' and used during backpropagation.
+// CUDA kernel to compute the derivative (gradient) of activation functions
+// The result is stored in 'store_in' and used during backpropagation
 //
 // Parameters:
 // - preActivations: Input matrix (pre-activation values) [rows x cols]
@@ -474,7 +474,7 @@ __global__ void Kernels::compute_dC_da(float* activations, float* Y_train, float
 }
 
 // CUDA kernel to compute total cross-entropy loss over a batch
-// The result is accumulated into a single float using atomicAdd.
+// The result is accumulated into a single float using atomicAdd
 //
 // Parameters:
 // - activations: Predicted probabilities from softmax, shape [rows x cols]
@@ -524,7 +524,7 @@ __global__ void Kernels::binary_cross_entropy(float* activations, float* Y_train
 }
 
 // CUDA kernel to compute total Mean Squared Error (MSE) loss
-// Each thread computes the squared error for one row/sample.
+// Each thread computes the squared error for one row/sample
 //
 // Parameters:
 // - activations: Predicted outputs [rows x cols]
