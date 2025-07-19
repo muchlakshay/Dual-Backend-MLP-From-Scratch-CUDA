@@ -15,6 +15,17 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 - Fully Customizable: Choose batch size, learning rate, architecture, backend, and more
 
 ## INSTALLATION
+### Requirements
+- Visual Studio 2022 (with Desktop development with C++ and CUDA workload)
+- CUDA Toolkit 7.5 or later
+- A CUDA-capable NVIDIA GPU
+
+### Build (Visual Studio)
+
+```bash
+git clone https://github.com/your-username/dual-backend-mlp.git
+
+```
 
 ## USAGE
 
