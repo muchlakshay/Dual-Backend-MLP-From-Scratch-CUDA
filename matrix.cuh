@@ -62,7 +62,7 @@ public:
 	void tanh(Matrix& store);
 	void softmax(Matrix& store);
 	friend void print(const Matrix& matrix); 
-	float* data() { return m_data_ptr; }
+	float* const data() { return m_data_ptr; }
 	int getRows() const { return m_rows; }
 	int getCols() const { return m_cols; }
 	void setDims(int rows, int cols);
