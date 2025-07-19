@@ -23,9 +23,16 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 ### Build (Visual Studio)
 
 ```bash
-git clone https://github.com/your-username/dual-backend-mlp.git
-
+git clone https://github.com/your-username/Dual-Backend-MLP-From-Scratch-CUDA.git
+cd Dual-Backend-MLP-From-Scratch-CUDA
 ```
+- Open .sln file in Visual Studio
+- CUDA files [.cu] should be marked as CUDA C/C++ in file properties
+- Build the solution (Release or Debug)
+
+## Build (CMake)
+
+- I'll add it later (Currently, idk how to use it)
 
 ## USAGE
 
