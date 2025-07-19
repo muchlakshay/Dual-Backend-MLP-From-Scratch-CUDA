@@ -592,7 +592,7 @@ EigenMatrix NeuralNetwork::predict(const EigenMatrix& to_predict) {
 };
 
 //Function To Calculate Accuracy
-float calculateAccuracy(const Eigen::MatrixXf& predictions, const Eigen::MatrixXf& Y_true) {
+float calculateAccuracy(const EigenMatrix& predictions, const EigenMatrix& Y_true) {
 	// Ensure both matrices have the same shape (i.e., same number of samples and classes)
 	assert(predictions.rows() == Y_true.rows() && predictions.cols() == Y_true.cols());
 
