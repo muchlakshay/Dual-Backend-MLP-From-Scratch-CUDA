@@ -10,6 +10,9 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 - Loss Functions: Mean Squared Error (MSE), Cross Entropy (CE), and Binary Cross Entropy (BCE)
 - Activation Functions: Sigmoid, Relu, Leaky Relu, Tanh, and Linear
 - Optimizers: vanilla Stochastic Gradient Descent (SGD), Mini-Batch SGD, and Momentum
+- Weight Initialization Techniques: Xavier Normal, Xavier Uniform, He Normal, and He Uniform 
 - Model Saving And Loading Mechanism
 - Fully Customizable: Choose batch size, learning rate, architecture, backend, and more
+
+  
  
