@@ -113,3 +113,13 @@ static EigenDataT load_csv_eigen(
 
     return data;
 }
+
+//one hot encode labels (for multiclass classification)
+EigenMatrix toOneHot(EigenVector& labels, int num_labels){
+    EigenMatrix one_hot {EigenMatrix::Zero(labels.rows(), num_labels)};
+    for (std::size_t i {}; i<labels.rows(); ++i){
+        one_hot(i, static_cast<int>(labels(i))) = 1.0;
+    }
+    return one_hot;
+}
+
