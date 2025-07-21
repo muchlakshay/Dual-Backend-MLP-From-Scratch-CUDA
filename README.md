@@ -47,11 +47,35 @@ To load data from a CSV file you can use ```loadcsv.cuh``` header file. First im
 
 EigenDataT data {load_csv_eigen("data.csv", "target_column", 0.7)};
 
-std::cout<< "Training Features\n" << data.X_train << "\n";
-
+std::cout << "Training Features\n" << data.X_train << "\n";
+std::cout << "Training Labels\n"   << data.Y_train << "\n";
+std::cout << "Testing Features\n"  << data.X_test  << "\n";
+std::cout << "Testing Labels\n"    << data.Y_test  << "\n";
 
 ```
-This funtion returns a Struct that contains Training Features (```X_train```) 
+
+This funtion returns a Struct that contains Training Features (```X_train```), Training Labels (```Y_train```), Testing Features (```X_test```) and Testing Labels (```Y_test```)
+
+You can also normalize the data using ```normalizeMatrix()``` function. It takes a reference to a ```EigenMatrix``` and then does in-place normalization
+
+``` normalizeMatrix(EigenMatrix& matrix) ```
+
+```cpp
+normalizeMatrix(data.X_train);
+
+std::cout << Normalized Training Features\n << data.X_train << "\n";
+```
+To one-hot-encode the labels you can use ```toOneHot()``` function. It will return an ```EigenMatrix``` containing the one-hot-encoded labels (for multiclass calssification)
+
+```cpp
+EigenMatrix Y_train_ohe { toOneHot(data.Y_train) };
+EigenMatrix Y_test_ohe  { toOneHot(data.Y_test)  } 
+
+std::cout<< "One Hot Encoded Training Labels\n" << Y_train_ohe << "\n";
+std::cout<< "One Hot Encoded Testing Labels\n"  << Y_test_ohe  << "\n";
+
+```
+
 
 ## ARCHITECTURE OVERVIEW
 
