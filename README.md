@@ -117,6 +117,54 @@ To configure learning rate, optimizer, loss function, batch_size and verbose use
 nn.assemble("cross_entropy", 0.01f, 128, 0.95, true)
 ```
 
+To start the training use ```learn()``` member function
+
+``` void NeuralNetwork::learn(EigenMatrix& X_train, EigenMatrix& Y_train, int epochs, const TrainingDevice& device, bool enableShuffling) ```
+
+- Training Devices - ```CPU``` and ```GPU```
+
+```cpp
+//for CPU training
+nn.learn(data.X_train, Y_train_ohe, 100, NeuralNetwork::TrainingDevice::CPU, false);
+
+//for GPU training
+ nn.learn(data.X_train, Y_train_ohe, 100, NeuralNetwork::TrainingDevice::GPU, false);
+```
+
+#### Final Example Pipe-Line
+
+```cpp
+
+#include "NeuralNetwork.cuh"
+#include "loadcsv.cuh"
+
+int main() {
+
+  //Data Loading
+  EigenDataT data { EigenDataT data {load_csv_eigen("data.csv", "target_column", 0.8)}; };
+
+  //Normalizing Data
+  normalizeMatrix(data.X_train);
+  normalizeMatrix(data.X_test);
+
+  //Model Building
+  NeuralNetwork nn;
+  nn.input(data.X_train.cols());
+  nn.extend(16, "leaky_relu", NeuralNetwork::Initializer::He_Normal);
+  nn.extend(4,  "leaky_relu", NeuralNetwork::Initializer::He_Normal);
+  nn.extend(1, "sigmoid", NeuralNetwork::Initializer::He_Normal);
+  nn.assemble("binary_cross_entropy", 0.001f, 64, 0.9, true);
+
+  nn.learn(data.X_train, data.Y_train, 100, NeuralNetwork::TrainingDevice::GPU, true);
+
+  //predictions
+  auto prediction { nn.predict(data.X_test) };
+
+  return 0;
+}
+
+```
+
 ## ARCHITECTURE OVERVIEW
 
 ## LIMITATION / KNOWN ISSUES 
