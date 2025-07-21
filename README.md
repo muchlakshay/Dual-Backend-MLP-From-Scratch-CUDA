@@ -36,6 +36,23 @@ cd Dual-Backend-MLP-From-Scratch-CUDA
 
 ## USAGE
 
+### Loading Data (From CSV Files)
+
+To load data from a CSV file you can use ```loadcsv.cuh``` header file. First import the header file and then you can use the ```load_csv_eigen()``` function to load the data.
+
+```load_csv_eigen(const std::string& filename, const std::string& target_column, float training_ratio = 0.8f)```
+
+```cpp
+#include loadcsv.h
+
+EigenDataT data {load_csv_eigen("data.csv", "target_column", 0.7)};
+
+std::cout<< "Training Features\n" << data.X_train << "\n";
+
+
+```
+This funtion returns a Struct that contains Training Features (```X_train```) 
+
 ## ARCHITECTURE OVERVIEW
 
 ## LIMITATION / KNOWN ISSUES 
