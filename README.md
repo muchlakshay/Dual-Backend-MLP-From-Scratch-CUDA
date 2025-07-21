@@ -43,7 +43,7 @@ To load data from a CSV file you can use ```loadcsv.cuh``` header file. First im
 ```load_csv_eigen(const std::string& filename, const std::string& target_column, float training_ratio = 0.8f)```
 
 ```cpp
-#include loadcsv.h
+#include loadcsv.cuh
 
 EigenDataT data {load_csv_eigen("data.csv", "target_column", 0.7)};
 
@@ -65,7 +65,9 @@ normalizeMatrix(data.X_train);
 
 std::cout << Normalized Training Features\n << data.X_train << "\n";
 ```
-To one-hot-encode the labels you can use ```toOneHot()``` function. It will return an ```EigenMatrix``` containing the one-hot-encoded labels (for multiclass calssification)
+To one-hot-encode the labels you can use ```toOneHot()``` function. It takes Labels and number of classes as parameters and returns an ```EigenMatrix``` containing the one-hot-encoded labels (for multiclass calssification)
+
+``` EigenMatrix toOneHot(EigenVector& labels, int num_labels) ```
 
 ```cpp
 EigenMatrix Y_train_ohe { toOneHot(data.Y_train) };
@@ -76,6 +78,44 @@ std::cout<< "One Hot Encoded Testing Labels\n"  << Y_test_ohe  << "\n";
 
 ```
 
+### Model Building 
+
+To build a model architecture, first include the ``` NeuralNetwork.cuh``` header file and initialize a ```NeuralNetwork``` class object 
+
+```cpp
+#include "NeuralNetwork.cuh"
+
+NeuralNetwork nn;
+```
+
+Now, first you have to define the size of input layer (number of columns in training features), you can do this using ```input()``` member function
+
+``` void NeuralNetwork::input(int size) ```
+
+```cpp
+input(data.X_train.cols());
+```
+Then to add hidden layers or output layer use ```extend()``` member funtion
+
+``` void NeuralNetwork::extend(int neurons, const std::string& activation_function, const Initializer& initializer) ```
+
+- Supported activation function - "sigmoid", "relu", "tanh", "softmax" and "linear"
+- Supported weight initializers - ```He_Uniform```, ```He_Normal```, ```Xavier_Uniform```, ```Xavier_Normal```
+
+```cpp
+//example
+nn.extend(16, "relu", NeuralNetwork::Initializer::Xavier_Uniform);
+```
+To configure learning rate, optimizer, loss function, batch_size and verbose use ```assemble()``` member function
+
+```void NeuralNetwork::assemble(const std::string& Loss_function, ElementType Learning_rate, int Batch_size, ElementType Momentum_coef=0.0f, bool Verbose=true)```
+
+- Supported loss functions - "MSE", "cross_entropy", and "binary_cross_entropy"
+- Supported optimizers - SGD [Default] (Keep ```Momentum_coef = 0.0f```) , Momentum (set ```Momentum_coef > 0.0```)
+
+```cpp
+nn.assemble("cross_entropy", 0.01f, 128, 0.95, true)
+```
 
 ## ARCHITECTURE OVERVIEW
 
