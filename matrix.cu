@@ -10,7 +10,6 @@
 #include <random>
 #include "KERNELS.cuh"
 #include "matrix.cuh"
-#include "overloadedOperators.cuh"
 
 //A Wrapper Around cudaMalloc For Easy And Silent Errors Free Memory Allocations
 float* Matrix::allocate(int size) {
@@ -155,7 +154,7 @@ Matrix Matrix::rowBlock(int from, int rows, bool isView){
 		mat.m_rows = rows;			
 		mat.m_cols = m_cols;
 		mat.m_elements = rows * m_cols;
-		mat.m_destroy = false;  // Don't free memory, since it’s just a view
+		mat.m_destroy = false;  // Don't free memory, since itâ€™s just a view
 		return mat;
 	}
 	else
