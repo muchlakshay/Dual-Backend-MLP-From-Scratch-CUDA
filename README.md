@@ -16,7 +16,6 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 
 ## INSTALLATION
 ### Requirements
-- Visual Studio 2022 (with Desktop development with C++ and CUDA workload)
 - CUDA Toolkit 7.5 or later
 - A CUDA-capable NVIDIA GPU
 
@@ -26,13 +25,14 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 git clone https://github.com/muchlakshay/Dual-Backend-MLP-From-Scratch-CUDA.git
 cd Dual-Backend-MLP-From-Scratch-CUDA
 ```
-- Open .sln file in Visual Studio
-- CUDA files [.cu] should be marked as CUDA C/C++ in file properties
-- Build the solution (Release or Debug)
+- Open the cloned repo and compile & run the project
 
-## Build (CMake)
+If you're using Windows (e.g., with Git Bash or PowerShell), make sure nvcc is in your system ```PATH```
 
-- I'll add it later (Currently, idk how to use it)
+```bash
+nvcc main.cu kernles.cu matrix.cu -o main.exe
+./main.exe
+```
 
 ## USAGE
 
@@ -228,7 +228,7 @@ int main() {
 
 ### Example Training On MNIST Dataset
 
-For loading MNIST dataset ```loadmnist.cuh```header file is used
+For loading MNIST dataset ```load_mnist.cuh```header file is used
 
 ```cpp
 #include "NeuralNetwork.cuh"
@@ -283,6 +283,9 @@ Image of a few predictions and accuracy
 
 <img width="1495" height="154" alt="image" src="https://github.com/user-attachments/assets/a188180e-874c-41c8-b23d-7194927ff0d1" />
 
-## ARCHITECTURE OVERVIEW
-
 ## LIMITATION / KNOWN ISSUES 
+
+- Unoptimized CUDA Kernels : The current GPU implementation prioritizes clarity, modularity, and reusability over low-level performance optimizations. It does not use Shared memory, Tiling strategies and Fused kernels but these can be added later for performance-critical use cases.
+- Lack of Training Metrics : The model currently reports only the loss after each epoch. It does not track or display Accuracy (Of Each Epoch), Validation performance, Training time or speed metrics
+- Only few activation and loss functions are available.
+  
