@@ -117,9 +117,11 @@ To configure learning rate, optimizer, loss function, batch_size and verbose use
 nn.assemble("cross_entropy", 0.01f, 128, 0.95, true)
 ```
 
-To start the training use ```learn()``` member function
+To start the training use ```learn()``` member function and for to predictions on data use ``` predict() ``` member function 
 
 ``` void NeuralNetwork::learn(EigenMatrix& X_train, EigenMatrix& Y_train, int epochs, const TrainingDevice& device, bool enableShuffling) ```
+
+``` EigenMatrix NeuralNetwork::predict(const EigenMatrix& to_predict) ```
 
 - Training Devices - ```CPU``` and ```GPU```
 
@@ -129,7 +131,26 @@ nn.learn(data.X_train, Y_train_ohe, 100, NeuralNetwork::TrainingDevice::CPU, fal
 
 //for GPU training
  nn.learn(data.X_train, Y_train_ohe, 100, NeuralNetwork::TrainingDevice::GPU, false);
+
+//doing predictions
+auto predictions { nn.predict(data.X_test) };
+
 ```
+
+For saving the model after training use ``` exportModel() ``` member function and to import a exported model, use ``` importModel() ``` member function 
+
+``` void NeuralNetwork::exportModel(const std::string& filename) ```
+``` void NeuralNetwork::importModel(const std::string& filename) ```
+
+```cpp
+//exporting a model
+nn.exportModel("model.txt");
+
+//importing a model
+NeuralNetwork nn2;
+nn2.importModel("model.ext")
+```
+After importing the model, you can do predictions or further training, or fine-tuning on another dataset (transfer learning)
 
 #### Final Example Pipe-Line
 
@@ -152,13 +173,16 @@ int main() {
   nn.input(data.X_train.cols());
   nn.extend(16, "leaky_relu", NeuralNetwork::Initializer::He_Normal);
   nn.extend(4,  "leaky_relu", NeuralNetwork::Initializer::He_Normal);
-  nn.extend(1, "sigmoid", NeuralNetwork::Initializer::He_Normal);
+  nn.extend(1,  "sigmoid",    NeuralNetwork::Initializer::He_Normal);
   nn.assemble("binary_cross_entropy", 0.001f, 64, 0.9, true);
 
   nn.learn(data.X_train, data.Y_train, 100, NeuralNetwork::TrainingDevice::GPU, true);
 
   //predictions
   auto prediction { nn.predict(data.X_test) };
+
+ //exporting trained model
+ nn.exportModel("model.txt");
 
   return 0;
 }
