@@ -137,6 +137,43 @@ auto predictions { nn.predict(data.X_test) };
 
 ```
 
+Use ```info()``` member function to print information about the Network's Architecture
+
+``` cpp
+NeuralNetwork nn;
+nn.input(10);
+nn.extend(16, "relu", NeuralNetwork::Initializer::Xavier_Uniform);
+nn.extend(5,  "softmax", NeuralNetwork::Initializer::Xavier_Uniform);
+
+nn.info();
+
+```
+Output:-
+```bash
+Layer 1: (Input Layer)
+
+Neurons: 10
+
+Layer: 2
+
+Neurons: 16
+Activation: relu
+Weights: 16 x 10 (160)
+Biases : 16
+
+Layer: 3
+
+Neurons: 5
+Activation: softmax
+Weights: 5 x 16 (80)
+Biases : 5
+
+Total Weights: 240
+Total Biases: 21
+Total Parameters: 261
+
+```
+
 For saving the model after training use ``` exportModel() ``` member function and to import a exported model, use ``` importModel() ``` member function 
 
 ``` void NeuralNetwork::exportModel(const std::string& filename) ```
@@ -234,13 +271,14 @@ int main() {
         //Calculation accuracy
 	std::cout << "Accuracy: " << calculateAccuracy(predicted, mnist.Y_test) << "%";
 
-       //exporting trained model (for future prediction or fine-tuning parameters more)
+       //exporting trained model (for future predictions or fine-tuning parameters more)
        nn.exportModel("model_mnist.txt");
 
 	return 0;
 }
 
 ```
+
 
 ## ARCHITECTURE OVERVIEW
 
