@@ -179,12 +179,65 @@ int main() {
   nn.learn(data.X_train, data.Y_train, 100, NeuralNetwork::TrainingDevice::GPU, true);
 
   //predictions
-  auto prediction { nn.predict(data.X_test) };
+  auto predictions { nn.predict(data.X_test) };
 
  //exporting trained model
  nn.exportModel("model.txt");
 
   return 0;
+}
+
+```
+
+### Example Training On MNIST Dataset
+
+For loading MNIST dataset ```loadmnist.cuh```header file is used
+
+```cpp
+#include "NeuralNetwork.cuh"
+#include "loadcsv.cuh"
+#include "load_mnist.cuh"
+
+int main() {
+
+        //struct to load MNIST
+	MNISTData mnist;
+
+        //importing MNIST
+	try {
+		mnist = load_mnist("train-images.idx3-ubyte", "train-labels.idx1-ubyte", "t10k-images.idx3-ubyte", "t10k-labels.idx1-ubyte");
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what();
+	}
+
+        //Building Model
+	NeuralNetwork nn;
+	nn.input(mnist.X_train.cols());
+	nn.extend(16, "tanh", NeuralNetwork::Initializer::Xavier_Uniform);
+	nn.extend(16, "tanh", NeuralNetwork::Initializer::Xavier_Uniform);
+	nn.extend(10, "softmax", NeuralNetwork::Initializer::Xavier_Uniform);
+	nn.assemble( "cross_entropy", 0.01f, 1000, 0.95f);
+
+        //Starting Training 
+	nn.learn(mnist.X_train, mnist.Y_train, 20, NeuralNetwork::TrainingDevice::GPU, false);
+	nn.exportModel("model.txt");
+
+        //Recognizing test digits
+	auto predicted{ nn.predict(mnist.X_test) };
+
+        //printing predictions
+	for (int i{}; i < predicted.rows(); ++i) {
+		std::cout << "Actual: " << mnist.Y_test.row(i) << " Predicted: " << predicted.row(i) << "\n";
+	}
+
+        //Calculation accuracy
+	std::cout << "Accuracy: " << calculateAccuracy(predicted, mnist.Y_test) << "%";
+
+       //exporting trained model (for future prediction or fine-tuning parameters more)
+       nn.exportModel("model_mnist.txt");
+
+	return 0;
 }
 
 ```
