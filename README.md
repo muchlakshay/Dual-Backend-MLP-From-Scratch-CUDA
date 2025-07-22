@@ -1,4 +1,4 @@
-# Dual-Backend-MLP-From-Scratch-CUDA-C-
+# Dual-Backend-MLP-From-Scratch-CUDA
 A fully from-scratch Multi-Layer Perceptron built in CUDA C++ with support for both GPU and CPU training.
 It features a clean, modular API for defining network architectures, loss functions, and activation functions without relying on external machine learning libraries. Whether you're experimenting on a CPU or training faster on a GPU, this dual-backend system enables you to easily switch between the two, making it ideal for both educational purposes and custom, low-level deep learning research
 
