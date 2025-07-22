@@ -16,7 +16,7 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 
 ## INSTALLATION
 ### Requirements
-- Eigen Library (Install it from - eigen.tuxfamily.org)
+- [Eigen](https://eigen.tuxfamily.org/) Library
 - CUDA Toolkit 7.5 or later
 - A CUDA-capable NVIDIA GPU
 
