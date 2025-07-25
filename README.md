@@ -20,7 +20,7 @@ Built by a teenager with a deep passion for AI systems and systems-level program
 - CUDA Toolkit 7.5 or later
 - A CUDA-capable NVIDIA GPU
 
-### Build (Visual Studio)
+### COMPILE AND RUN
 
 ```bash
 git clone https://github.com/muchlakshay/Dual-Backend-MLP-From-Scratch-CUDA.git
