@@ -145,6 +145,9 @@ void feedForwardGPU(Matrix batch, int batch_size) {
 			layer.in
 			);
 
+		cudaDeviceSynchronize();
+		CUDA_CHECK(cudaGetLastError());
+
 		//Apply Activations
 		if (layer.activationFunction == "sigmoid") layer.preActivations.sigmoid(layer.activations);
 		else if (layer.activationFunction == "relu") layer.preActivations.relu(layer.activations);
@@ -153,8 +156,6 @@ void feedForwardGPU(Matrix batch, int batch_size) {
 		else if (layer.activationFunction == "softmax") layer.preActivations.softmax(layer.activations);
 		else if (layer.activationFunction == "linear") layer.activations.clone(layer.preActivations);
 
-		cudaDeviceSynchronize();
-		CUDA_CHECK(cudaGetLastError());
 	}
 
 }
