@@ -259,7 +259,6 @@ int main() {
 
         //Starting Training 
 	nn.learn(mnist.X_train, mnist.Y_train, 20, NeuralNetwork::TrainingDevice::GPU, false);
-	nn.exportModel("model.txt");
 
         //Recognizing test digits
 	auto predicted{ nn.predict(mnist.X_test) };
@@ -269,7 +268,7 @@ int main() {
 		std::cout << "Actual: " << mnist.Y_test.row(i) << " Predicted: " << predicted.row(i) << "\n";
 	}
 
-        //Calculation accuracy
+        //accuracy calculation
 	std::cout << "Accuracy: " << calculateAccuracy(predicted, mnist.Y_test) << "%";
 
        //exporting trained model (for future predictions or fine-tuning parameters more)
