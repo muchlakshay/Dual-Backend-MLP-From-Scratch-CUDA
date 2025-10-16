@@ -66,7 +66,7 @@ normalizeMatrix(data.X_train);
 
 std::cout << Normalized Training Features\n << data.X_train << "\n";
 ```
-To one-hot-encode the labels you can use ```toOneHot()``` function. It takes Labels and number of classes as parameters and returns an ```EigenMatrix``` containing the one-hot-encoded labels (for multiclass calssification)
+To one-hot-encode the labels you can use ```toOneHot()``` function. It takes Labels and number of classes as arguments and returns an ```EigenMatrix``` containing the one-hot-encoded labels (for multiclass calssification)
 
 ``` EigenMatrix toOneHot(EigenVector& labels, int num_labels) ```
 
@@ -94,7 +94,7 @@ Now, first you have to define the size of input layer (number of columns in trai
 ``` void NeuralNetwork::input(int size) ```
 
 ```cpp
-input(data.X_train.cols());
+nn.input(data.X_train.cols());
 ```
 Then to add hidden layers or output layer use ```extend()``` member funtion
 
