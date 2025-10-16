@@ -279,7 +279,7 @@ int main() {
 
 ```
 
-Image of a few predictions and accuracy
+Image of few predictions and accuracy
 
 <img width="1495" height="154" alt="image" src="https://github.com/user-attachments/assets/a188180e-874c-41c8-b23d-7194927ff0d1" />
 
